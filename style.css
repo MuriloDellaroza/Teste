@@ -548,6 +548,24 @@ p {
     color: var(--text-dim);
 }
 
+.poll-reset-btn {
+    background: transparent;
+    border: 1px solid var(--border-soft);
+    color: var(--purple-soft);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: all 0.2s ease;
+}
+
+.poll-reset-btn:hover {
+    background: rgba(155, 93, 229, 0.12);
+    border-color: var(--purple-primary);
+}
+
 .poll-disclaimer {
     font-size: 0.8rem;
     color: var(--text-dim);

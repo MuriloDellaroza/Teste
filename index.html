@@ -9,9 +9,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
     <script>
         // Fallback: se o CDN principal falhar, carrega de um CDN alternativo
-        if (typeof Chart === 'undefined') {
-            document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"><\/script>');
-        }
+        window.addEventListener('DOMContentLoaded', function () {
+            if (typeof Chart === 'undefined') {
+                const fallback = document.createElement('script');
+                fallback.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js';
+                document.head.appendChild(fallback);
+            }
+        });
     </script>
 </head>
 
@@ -342,6 +346,7 @@
                             <span class="poll-result-pct">0%</span>
                         </div>
                         <p class="poll-total">Total de votos: <span id="pollTotal">0</span></p>
+                        <button id="pollResetBtn" class="poll-reset-btn">Votar novamente</button>
                         <p class="poll-disclaimer">
                             Esta enquete reflete apenas a percepção dos visitantes deste site,
                             não é uma pesquisa científica. Segundo dados oficiais, a violência
@@ -606,7 +611,6 @@
                 da Secretaria de Segurança Pública do Paraná (SESP-PR), Sistema
                 Nacional de Informações de Segurança Pública (Sinesp), Fórum Brasileiro
                 de Segurança Pública e Senado Federal.
-                Feito por: Murilo Dellaroza, Matheus Henrique Moreira Dos Santos, Miguel Ruan Barbosa, 1°MB
             </p>
             <p class="footer-emergency">Em caso de emergência, ligue <strong>190</strong> ou <strong>180</strong>.</p>
         </div>
@@ -614,259 +618,171 @@
 
     <script>
         // Sistema de votação (em memória — reinicia ao recarregar a página)
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enquete - Tipos de Violência</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f8f7fc;
-            padding: 20px;
-        }
-        .poll-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            padding: 25px;
-        }
-        h3 {
-            text-align: center;
-            color: #6c2bd9;
-            margin-bottom: 20px;
-        }
-        .poll-option {
-            margin: 12px 0;
-        }
-        button, .poll-option label {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            margin: 8px 0;
-            border: 2px solid #e0d4f5;
-            border-radius: 8px;
-            background: white;
-            font-size: 1.05rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        button:hover, .poll-option label:hover {
-            background: #f0e9ff;
-            border-color: #9b5de5;
-        }
-        .poll-results {
-            margin-top: 30px;
-        }
-        .poll-result-row {
-            margin: 18px 0;
-        }
-        .poll-label {
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #333;
-        }
-        .poll-bar {
-            height: 18px;
-            background: #e0d4f5;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        .poll-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #9b5de5, #6c2bd9);
-            border-radius: 20px;
-        }
-        .poll-result-pct {
-            text-align: right;
-            font-size: 0.95rem;
-            margin-top: 4px;
-            color: #555;
-        }
-        .total-votos {
-            text-align: center;
-            font-size: 1.3rem;
-            margin: 20px 0;
-            padding: 15px;
-            background: #f0e9ff;
-            border-radius: 10px;
-            color: #6c2bd9;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
-</head>
-<body>
+        const pollVotes = {
+            'Física': 0,
+            'Psicológica': 0,
+            'Sexual': 0,
+            'Patrimonial': 0,
+            'Moral': 0,
+            'Institucional': 0
+        };
+        let hasVoted = false;
 
-<div class="poll-container">
-    
-    <h3>Qual o tipo de violência mais comum?</h3>
+        function renderPollResults() {
+            const total = Object.values(pollVotes).reduce((a, b) => a + b, 0);
+            document.getElementById('pollTotal').textContent = total;
 
-    <!-- Formulário de Votação (sem JavaScript) -->
-    <form id="pollForm" action="#" method="POST">
-        <div class="poll-option">
-            <label>
-                <input type="radio" name="voto" value="Física"> Física
-            </label>
-        </div>
-        <div class="poll-option">
-            <label>
-                <input type="radio" name="voto" value="Psicológica"> Psicológica
-            </label>
-        </div>
-        <div class="poll-option">
-            <label>
-                <input type="radio" name="voto" value="Sexual"> Sexual
-            </label>
-        </div>
-        <div class="poll-option">
-            <label>
-                <input type="radio" name="voto" value="Patrimonial"> Patrimonial
-            </label>
-        </div>
-        <div class="poll-option">
-            <label>
-                <input type="radio" name="voto" value="Moral"> Moral
-            </label>
-        </div>
-        <div class="poll-option">
-            <label>
-                <input type="radio" name="voto" value="Institucional"> Institucional
-            </label>
-        </div>
+            document.querySelectorAll('.poll-result-row').forEach(row => {
+                const key = row.getAttribute('data-result');
+                const votes = pollVotes[key] || 0;
+                const pct = total > 0 ? Math.round((votes / total) * 100) : 0;
+                row.querySelector('.poll-bar-fill').style.width = pct + '%';
+                row.querySelector('.poll-result-pct').textContent = pct + '% (' + votes + ')';
+            });
+        }
 
-        <button type="submit" style="margin-top: 20px; background:#9b5de5; color:white; border:none;">
-            Votar
-        </button>
-    </form>
+        function registerVote(option) {
+            if (!(option in pollVotes)) {
+                console.warn('Opção de voto desconhecida:', option);
+                return;
+            }
+            pollVotes[option]++;
+            hasVoted = true;
+            document.getElementById('pollOptions').classList.add('hidden');
+            document.getElementById('pollResults').classList.remove('hidden');
+            renderPollResults();
+        }
 
-    <!-- Resultados (Exemplo estático) -->
-    <div class="poll-results">
-        <h3 style="margin-top: 40px;">Resultados da Enquete</h3>
-        
-        <div class="total-votos">
-            Total de votos: <strong>248</strong>
-        </div>
+        document.querySelectorAll('.poll-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (hasVoted) return;
+                registerVote(btn.getAttribute('data-option'));
+            });
+        });
 
-        <div class="poll-result-row">
-            <div class="poll-label">Física</div>
-            <div class="poll-bar"><div class="poll-bar-fill" style="width: 35%"></div></div>
-            <div class="poll-result-pct">35% (87)</div>
-        </div>
-
-        <div class="poll-result-row">
-            <div class="poll-label">Psicológica</div>
-            <div class="poll-bar"><div class="poll-bar-fill" style="width: 42%"></div></div>
-            <div class="poll-result-pct">42% (104)</div>
-        </div>
-
-        <div class="poll-result-row">
-            <div class="poll-label">Sexual</div>
-            <div class="poll-bar"><div class="poll-bar-fill" style="width: 12%"></div></div>
-            <div class="poll-result-pct">12% (30)</div>
-        </div>
-
-        <div class="poll-result-row">
-            <div class="poll-label">Patrimonial</div>
-            <div class="poll-bar"><div class="poll-bar-fill" style="width: 6%"></div></div>
-            <div class="poll-result-pct">6% (15
+        const resetBtn = document.getElementById('pollResetBtn');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                hasVoted = false;
+                document.getElementById('pollResults').classList.add('hidden');
+                document.getElementById('pollOptions').classList.remove('hidden');
+            });
+        }
     </script>
-    </script>
-    // 1. Evolução anual no Paraná
-    new Chart(document.getElementById('chartAnual'), {
-    type: 'bar',
-    data: {
-    labels: ['2024', '2025'],
-    datasets: [{
-    label: 'Feminicídios no Paraná',
-    data: [109, 87],
-    backgroundColor: [purpleDeep, purple],
-    borderRadius: 8,
-    maxBarThickness: 90
-    }]
-    },
-    options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: commonScales
-    }
-    });
 
-    // 2. Janeiro 2025 vs Janeiro 2026
-    new Chart(document.getElementById('chartJaneiro'), {
-    type: 'bar',
-    data: {
-    labels: ['Jan/2025', 'Jan/2026'],
-    datasets: [{
-    label: 'Casos em janeiro',
-    data: [13, 8],
-    backgroundColor: [red, purple],
-    borderRadius: 8,
-    maxBarThickness: 90
-    }]
-    },
-    options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: commonScales
-    }
-    });
+    <script>
+        const purple = '#9b5de5';
+        const purpleDeep = '#6c2bd9';
+        const purpleSoft = '#c8a2f0';
+        const red = '#e5395d';
+        const textMuted = '#b4acc4';
+        const gridColor = 'rgba(155, 93, 229, 0.12)';
 
-    // 3. Casos por estado - 1º trimestre 2026
-    new Chart(document.getElementById('chartEstados'), {
-    type: 'bar',
-    data: {
-    labels: ['São Paulo', 'Minas Gerais', 'Paraná', 'Bahia', 'Rio G. do Sul'],
-    datasets: [{
-    label: 'Casos no 1º trimestre de 2026',
-    data: [86, 42, 33, 25, 24],
-    backgroundColor: (ctx) => ctx.dataIndex === 2 ? purple : 'rgba(155, 93, 229, 0.35)',
-    borderRadius: 8
-    }]
-    },
-    options: {
-    indexAxis: 'y',
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: {
-    x: { grid: { color: gridColor }, ticks: { color: textMuted }, beginAtZero: true },
-    y: { grid: { color: 'transparent' }, ticks: { color: textMuted } }
-    }
-    }
-    });
+        if (typeof Chart === 'undefined') {
+            document.querySelectorAll('.chart-wrap').forEach(el => {
+                el.innerHTML = '<p style="color:#7d7590;font-size:0.85rem;text-align:center;padding-top:100px;">Não foi possível carregar a biblioteca de gráficos. Verifique sua conexão com a internet.</p>';
+            });
+        } else {
 
-    // 4. Feminicídios no Brasil por mês - 1º trimestre 2026
-    new Chart(document.getElementById('chartMeses'), {
-    type: 'line',
-    data: {
-    labels: ['Janeiro', 'Fevereiro', 'Março'],
-    datasets: [{
-    label: 'Vítimas de feminicídio no Brasil',
-    data: [142, 123, 134],
-    borderColor: purpleSoft,
-    backgroundColor: 'rgba(155, 93, 229, 0.2)',
-    fill: true,
-    tension: 0.35,
-    pointBackgroundColor: purple,
-    pointRadius: 5
-    }]
-    },
-    options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: commonScales
-    }
-    });
+            Chart.defaults.color = textMuted;
+            Chart.defaults.font.family = "'Segoe UI', Arial, sans-serif";
 
-    } // fim do if (typeof Chart !== 'undefined')
+            const commonScales = {
+                x: { grid: { color: gridColor }, ticks: { color: textMuted } },
+                y: { grid: { color: gridColor }, ticks: { color: textMuted }, beginAtZero: true }
+            };
+
+            // 1. Evolução anual no Paraná
+            new Chart(document.getElementById('chartAnual'), {
+                type: 'bar',
+                data: {
+                    labels: ['2024', '2025'],
+                    datasets: [{
+                        label: 'Feminicídios no Paraná',
+                        data: [109, 87],
+                        backgroundColor: [purpleDeep, purple],
+                        borderRadius: 8,
+                        maxBarThickness: 90
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: commonScales
+                }
+            });
+
+            // 2. Janeiro 2025 vs Janeiro 2026
+            new Chart(document.getElementById('chartJaneiro'), {
+                type: 'bar',
+                data: {
+                    labels: ['Jan/2025', 'Jan/2026'],
+                    datasets: [{
+                        label: 'Casos em janeiro',
+                        data: [13, 8],
+                        backgroundColor: [red, purple],
+                        borderRadius: 8,
+                        maxBarThickness: 90
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: commonScales
+                }
+            });
+
+            // 3. Casos por estado - 1º trimestre 2026
+            new Chart(document.getElementById('chartEstados'), {
+                type: 'bar',
+                data: {
+                    labels: ['São Paulo', 'Minas Gerais', 'Paraná', 'Bahia', 'Rio G. do Sul'],
+                    datasets: [{
+                        label: 'Casos no 1º trimestre de 2026',
+                        data: [86, 42, 33, 25, 24],
+                        backgroundColor: (ctx) => ctx.dataIndex === 2 ? purple : 'rgba(155, 93, 229, 0.35)',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: gridColor }, ticks: { color: textMuted }, beginAtZero: true },
+                        y: { grid: { color: 'transparent' }, ticks: { color: textMuted } }
+                    }
+                }
+            });
+
+            // 4. Feminicídios no Brasil por mês - 1º trimestre 2026
+            new Chart(document.getElementById('chartMeses'), {
+                type: 'line',
+                data: {
+                    labels: ['Janeiro', 'Fevereiro', 'Março'],
+                    datasets: [{
+                        label: 'Vítimas de feminicídio no Brasil',
+                        data: [142, 123, 134],
+                        borderColor: purpleSoft,
+                        backgroundColor: 'rgba(155, 93, 229, 0.2)',
+                        fill: true,
+                        tension: 0.35,
+                        pointBackgroundColor: purple,
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: commonScales
+                }
+            });
+
+        } // fim do if (typeof Chart !== 'undefined')
     </script>
 </body>
 
