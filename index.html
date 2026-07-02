@@ -1,426 +1,514 @@
-HTML
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Não Seremos a Próxima | Feminicídio no Paraná</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
-
-        :root {
-            --roxo: #9F4BFF;
-            --roxo-escuro: #7B2CCF;
-            --cinza-escuro: #1A1A1A;
-            --cinza-medio: #2A2A2A;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--cinza-escuro);
-            color: #E0E0E0;
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--cinza-escuro), #2A2A2A);
-            padding: 2rem 0;
-            border-bottom: 4px solid var(--roxo);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--roxo);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #E0E0E0;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--roxo);
-        }
-
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://picsum.photos/id/1015/2000/1200') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            margin-top: 80px;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            color: white;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 20px rgba(159, 75, 255, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            color: #ddd;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--roxo);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid var(--roxo);
-        }
-
-        .btn:hover {
-            background: transparent;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(159, 75, 255, 0.4);
-        }
-
-        section {
-            padding: 6rem 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-
-        h2 {
-            font-size: 2.8rem;
-            color: var(--roxo);
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--roxo);
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--cinza-medio);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #444;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(159, 75, 255, 0.2);
-        }
-
-        .card h3 {
-            color: var(--roxo);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .stat-item {
-            text-align: center;
-            background: var(--cinza-medio);
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 6px solid var(--roxo);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--roxo);
-        }
-
-        footer {
-            background: #111;
-            padding: 4rem 0 2rem;
-            text-align: center;
-            border-top: 3px solid var(--roxo);
-        }
-
-        .emergency-bar {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #9F4BFF;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(159, 75, 255, 0.5);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-    </style>
+    <title>Feminicídio no Paraná | Informação, Prevenção e Proteção</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <nav>
-            <a href="#" class="logo">Não Seremos a Próxima</a>
+
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="logo">Basta<span>.PR</span></div>
             <ul class="nav-links">
-                <li><a href="#casos">Casos</a></li>
-                <li><a href="#estatisticas">Estatísticas</a></li>
-                <li><a href="#emergencia">Emergência</a></li>
-                <li><a href="#tipos">Tipos de Violência</a></li>
                 <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#prevencao">Como Não Ser a Próxima</a></li>
+                <li><a href="#estatisticas">Estatísticas</a></li>
+                <li><a href="#tipos">Tipos de Violência</a></li>
+                <li><a href="#casos">Casos</a></li>
+                <li><a href="#emergencia">Emergência</a></li>
+                <li><a href="#prevencao">Como se proteger</a></li>
             </ul>
         </nav>
+
+        <div class="hero">
+            <div class="hero-content">
+                <p class="hero-tag">Observatório de Feminicídio — Paraná</p>
+                <h1>Nenhuma mulher deveria morrer por ser mulher.</h1>
+                <p class="hero-subtitle">
+                    Este site reúne dados, orientações e recursos sobre o feminicídio no
+                    Estado do Paraná. Informação salva vidas — conhecer os sinais, as leis
+                    e os canais de apoio é o primeiro passo para romper o ciclo da violência.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#emergencia" class="btn btn-primary">Preciso de ajuda agora</a>
+                    <a href="#estatisticas" class="btn btn-outline">Ver estatísticas</a>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Feminicídio no Paraná</h1>
-            <p>Uma em cada três mulheres sofre algum tipo de violência. O silêncio mata. Denuncie. Proteja-se. Exija
-                justiça.</p>
-            <a href="#emergencia" class="btn">LIGUE AGORA - 180</a>
+    <main>
+
+        <!-- SOBRE -->
+        <section id="sobre" class="section">
+            <div class="section-inner">
+                <span class="section-label">01 · Sobre</span>
+                <h2>O que é feminicídio</h2>
+                <div class="grid-2">
+                    <div>
+                        <p>
+                            Feminicídio é o homicídio de uma mulher pelo simples fato de ser mulher,
+                            motivado por razões da condição do sexo feminino. No Brasil, a
+                            <strong>Lei nº 13.104/2015</strong> alterou o Código Penal e incluiu o
+                            feminicídio como qualificadora do crime de homicídio, tornando-o
+                            crime hediondo — o que implica penas mais severas e regime de
+                            cumprimento mais rigoroso.
+                        </p>
+                        <p>
+                            A lei considera que há razões de condição do sexo feminino quando o
+                            crime envolve:
+                        </p>
+                        <ul class="styled-list">
+                            <li>Violência doméstica e familiar;</li>
+                            <li>Menosprezo ou discriminação à condição de mulher;</li>
+                            <li>Situações em que a vítima é morta por seu parceiro, ex-parceiro
+                                ou membro da família, muitas vezes após um histórico de agressões,
+                                ameaças e controle.</li>
+                        </ul>
+                        <p>
+                            O feminicídio raramente é um evento isolado. Na maioria dos casos, é
+                            o desfecho fatal de um ciclo de violência que já vinha se
+                            manifestando havia meses ou anos, por meio de agressões físicas,
+                            psicológicas, sexuais ou patrimoniais.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Marco legal de proteção</h3>
+                        <ul class="checklist">
+                            <li><strong>Lei Maria da Penha (11.340/2006)</strong> — cria mecanismos
+                                para coibir a violência doméstica e familiar contra a mulher.</li>
+                            <li><strong>Lei do Feminicídio (13.104/2015)</strong> — qualifica o
+                                homicídio motivado pela condição de sexo feminino como crime
+                                hediondo.</li>
+                            <li><strong>Lei 13.827/2019</strong> — permite que a autoridade
+                                policial conceda medida protetiva de urgência em caráter
+                                imediato, mesmo sem decisão judicial prévia.</li>
+                            <li><strong>Lei 14.188/2021</strong> — cria o programa "Sinal Vermelho"
+                                e o tipo penal de violência psicológica contra a mulher.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quote-block">
+                    <p>
+                        "Toda morte nos causa tristeza — mas a curva de queda mostra que
+                        estamos no caminho certo." — Secretaria de Segurança Pública do
+                        Paraná, sobre os avanços recentes no combate ao feminicídio.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESTATÍSTICAS -->
+        <section id="estatisticas" class="section section-alt">
+            <div class="section-inner">
+                <span class="section-label">02 · Estatísticas</span>
+                <h2>Os números do feminicídio</h2>
+                <p class="section-intro">
+                    Os dados mostram um cenário duplo: o Paraná vem registrando quedas
+                    consecutivas nos indicadores de feminicídio, enquanto o Brasil como
+                    um todo bateu recorde histórico em 2025. A vigilância continua
+                    essencial.
+                </p>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">87</span>
+                        <span class="stat-label">feminicídios no Paraná em 2025</span>
+                        <span class="stat-detail">queda de 20,2% frente aos 109 casos de 2024</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">0,73</span>
+                        <span class="stat-label">por 100 mil habitantes</span>
+                        <span class="stat-detail">uma das menores taxas estaduais do país em 2025</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">casos em janeiro/2026</span>
+                        <span class="stat-detail">queda de quase 40% frente aos 13 casos de jan/2025</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">33</span>
+                        <span class="stat-label">casos no 1º trimestre de 2026</span>
+                        <span class="stat-detail">Paraná é o 3º estado com mais casos no período, atrás de SP e
+                            MG</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">6.687</span>
+                        <span class="stat-label">ocorrências de violência doméstica</span>
+                        <span class="stat-detail">registradas no Paraná só em janeiro de 2026</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">25%</span>
+                        <span class="stat-label">de redução nos municípios do Mulher Segura</span>
+                        <span class="stat-detail">nas cidades onde o programa atua há mais tempo, entre jan-set de
+                            2025</span>
+                    </div>
+                </div>
+
+                <h3 class="sub-h">Panorama nacional (Brasil, 2025)</h3>
+                <div class="grid-2">
+                    <div>
+                        <ul class="styled-list">
+                            <li><strong>1.568 mulheres</strong> foram vítimas de feminicídio no
+                                Brasil em 2025 — crescimento de 4,7% em relação a 2024.</li>
+                            <li>Desde a tipificação da lei, em 2015, ao menos
+                                <strong>13.703 mulheres</strong> já foram assassinadas por sua
+                                condição de gênero no país.
+                            </li>
+                            <li>Cidades com até 100 mil habitantes concentram
+                                <strong>50% das mortes</strong> por feminicídio, embora reúnam
+                                apenas 41% da população feminina — municípios pequenos têm
+                                menos estrutura de proteção.
+                            </li>
+                            <li><strong>148 mulheres</strong> foram mortas mesmo estando
+                                amparadas por uma medida protetiva de urgência vigente.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>Por que isso importa para o Paraná</h3>
+                        <p>
+                            Apenas <strong>5%</strong> dos municípios de pequeno porte no
+                            Brasil possuem Delegacia Especializada de Atendimento à Mulher, e
+                            só <strong>3%</strong> contam com Casa Abrigo. No interior
+                            paranaense, muitas cidades ainda dependem de estruturas
+                            regionais — o que reforça a importância de conhecer os canais de
+                            denúncia à distância, como o 180 e o 181.
+                        </p>
+                    </div>
+                </div>
+
+                <p class="source-note">
+                    Fontes: Secretaria de Segurança Pública do Paraná (SESP-PR),
+                    Sistema Nacional de Informações de Segurança Pública (Sinesp/MJSP),
+                    Fórum Brasileiro de Segurança Pública (Retrato dos Feminicídios no
+                    Brasil, 2026) e IBDFAM. Dados sujeitos a atualização conforme novos
+                    boletins oficiais.
+                </p>
+            </div>
+        </section>
+
+        <!-- TIPOS DE VIOLÊNCIA -->
+        <section id="tipos" class="section">
+            <div class="section-inner">
+                <span class="section-label">03 · Tipos de Violência</span>
+                <h2>Nem toda violência deixa marca visível</h2>
+                <p class="section-intro">
+                    A Lei Maria da Penha reconhece cinco formas de violência doméstica e
+                    familiar contra a mulher. Reconhecer cada uma delas é essencial para
+                    identificar o problema antes que ele se agrave.
+                </p>
+
+                <div class="violence-grid">
+                    <div class="violence-card">
+                        <div class="violence-icon">01</div>
+                        <h3>Violência Física</h3>
+                        <p>Qualquer conduta que ofenda a integridade ou saúde corporal da
+                            mulher — tapas, socos, empurrões, queimaduras, uso de objetos ou
+                            armas. É a forma mais visível, mas nem sempre a primeira a
+                            aparecer.</p>
+                    </div>
+                    <div class="violence-card">
+                        <div class="violence-icon">02</div>
+                        <h3>Violência Psicológica</h3>
+                        <p>Humilhação constante, ameaças, manipulação, isolamento de amigos
+                            e família, controle excessivo, ciúme doentio, xingamentos e
+                            chantagem emocional. Desde 2021 é crime autônomo, com pena de 6
+                            meses a 2 anos.</p>
+                    </div>
+                    <div class="violence-card">
+                        <div class="violence-icon">03</div>
+                        <h3>Violência Sexual</h3>
+                        <p>Constranger a mulher a presenciar, manter ou participar de
+                            relação sexual não desejada, por meio de força, ameaça ou
+                            intimidação — inclusive dentro do casamento ou de uma relação
+                            estável.</p>
+                    </div>
+                    <div class="violence-card">
+                        <div class="violence-icon">04</div>
+                        <h3>Violência Patrimonial</h3>
+                        <p>Retenção, destruição ou subtração de bens, documentos, valores
+                            ou instrumentos de trabalho da mulher. Inclui impedir que ela
+                            trabalhe ou controlar totalmente suas finanças.</p>
+                    </div>
+                    <div class="violence-card">
+                        <div class="violence-icon">05</div>
+                        <h3>Violência Moral</h3>
+                        <p>Calúnia, difamação ou injúria — acusar a mulher de traição sem
+                            provas, espalhar boatos, expor a vida íntima dela para
+                            constrangê-la ou desqualificá-la publicamente.</p>
+                    </div>
+                    <div class="violence-card">
+                        <div class="violence-icon">06</div>
+                        <h3>Violência Institucional</h3>
+                        <p>Ocorre quando serviços públicos (saúde, segurança, justiça)
+                            revitimizam, descredibilizam ou negam atendimento adequado à mulher
+                            que denuncia. Você tem direito a ser ouvida e acreditada.</p>
+                    </div>
+                </div>
+
+                <div class="cycle-box">
+                    <h3>O ciclo da violência</h3>
+                    <div class="cycle-steps">
+                        <div class="cycle-step">
+                            <span class="cycle-number">1</span>
+                            <h4>Tensão</h4>
+                            <p>Aumento de irritabilidade, cobranças e discussões pequenas.</p>
+                        </div>
+                        <div class="cycle-step">
+                            <span class="cycle-number">2</span>
+                            <h4>Explosão</h4>
+                            <p>A agressão acontece — física, verbal, sexual ou psicológica.</p>
+                        </div>
+                        <div class="cycle-step">
+                            <span class="cycle-number">3</span>
+                            <h4>Lua de mel</h4>
+                            <p>Pedidos de desculpa, promessas de mudança, carinho excessivo.</p>
+                        </div>
+                    </div>
+                    <p class="cycle-note">
+                        O ciclo tende a se repetir e a se intensificar com o tempo — os
+                        intervalos entre as fases diminuem e a gravidade aumenta. Reconhecer
+                        esse padrão é fundamental para buscar ajuda antes da escalada.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASOS -->
+        <section id="casos" class="section section-alt">
+            <div class="section-inner">
+                <span class="section-label">04 · Casos</span>
+                <h2>O perfil dos casos no Paraná e no Brasil</h2>
+                <p class="section-intro">
+                    Em vez de expor detalhes individuais de vítimas — o que pode
+                    revitimizar famílias e não contribui para a prevenção — reunimos
+                    aqui o <strong>perfil estatístico</strong> dos casos, com base em
+                    relatórios oficiais, para mostrar onde e como o crime mais acontece.
+                </p>
+
+                <div class="grid-2">
+                    <div class="info-card">
+                        <h3>Quem comete</h3>
+                        <ul class="checklist">
+                            <li>A maioria dos feminicídios é cometida por parceiros ou
+                                ex-parceiros íntimos — maridos, namorados, ex-maridos ou
+                                ex-namorados.</li>
+                            <li>Em boa parte dos casos há um histórico prévio de violência
+                                doméstica já registrado ou percebido por familiares e vizinhos.</li>
+                            <li>O motivador mais comum é a recusa da mulher em manter o
+                                relacionamento — separações e tentativas de romper o vínculo são
+                                momentos de altíssimo risco.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>Onde acontece</h3>
+                        <ul class="checklist">
+                            <li>A maior parte dos casos ocorre dentro da própria residência
+                                da vítima.</li>
+                            <li>Municípios de pequeno porte concentram proporcionalmente mais
+                                mortes, muitas vezes por terem menos delegacias especializadas e
+                                casas-abrigo.</li>
+                            <li>No Paraná, a Capital e a Região Metropolitana concentram
+                                parte relevante das ocorrências, mas o interior também registra
+                                casos graves, agravados pela distância dos serviços de proteção.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h3>Um dado que não pode ser ignorado</h3>
+                    <p>
+                        No Brasil, <strong>148 mulheres</strong> foram assassinadas mesmo
+                        estando protegidas por uma medida protetiva de urgência vigente no
+                        momento do crime. Isso mostra que a medida protetiva é uma
+                        ferramenta importante, mas não substitui um plano de segurança
+                        pessoal e o acompanhamento de rede de apoio.
+                    </p>
+                </div>
+
+                <p class="source-note">
+                    Nenhum dado individual de vítima é divulgado neste site. As
+                    informações acima são agregadas a partir de relatórios do Fórum
+                    Brasileiro de Segurança Pública e da Secretaria de Segurança Pública
+                    do Paraná.
+                </p>
+            </div>
+        </section>
+
+        <!-- EMERGÊNCIA -->
+        <section id="emergencia" class="section section-emergency">
+            <div class="section-inner">
+                <span class="section-label">05 · Emergência</span>
+                <h2>Se você está em risco agora, ligue</h2>
+                <p class="section-intro">
+                    Em caso de perigo iminente, não espere. Os canais abaixo funcionam 24
+                    horas por dia, todos os dias, incluindo finais de semana e feriados.
+                </p>
+
+                <div class="emergency-grid">
+                    <a href="tel:190" class="emergency-card urgent">
+                        <span class="emergency-number">190</span>
+                        <span class="emergency-name">Polícia Militar</span>
+                        <span class="emergency-desc">Emergência policial imediata — ligação gratuita, 24h.</span>
+                    </a>
+                    <a href="tel:180" class="emergency-card">
+                        <span class="emergency-number">180</span>
+                        <span class="emergency-name">Central de Atendimento à Mulher</span>
+                        <span class="emergency-desc">Orientação, denúncia e encaminhamento a serviços de proteção,
+                            24h.</span>
+                    </a>
+                    <a href="tel:181" class="emergency-card">
+                        <span class="emergency-number">181</span>
+                        <span class="emergency-name">Disque Denúncia</span>
+                        <span class="emergency-desc">Denúncia anônima, disponível 24h em todo o Paraná.</span>
+                    </a>
+                    <a href="tel:197" class="emergency-card">
+                        <span class="emergency-number">197</span>
+                        <span class="emergency-name">Polícia Civil</span>
+                        <span class="emergency-desc">Registro de ocorrência e investigação criminal.</span>
+                    </a>
+                    <a href="tel:192" class="emergency-card">
+                        <span class="emergency-number">192</span>
+                        <span class="emergency-name">SAMU</span>
+                        <span class="emergency-desc">Emergência médica em caso de ferimentos ou risco à saúde.</span>
+                    </a>
+                    <a href="tel:100" class="emergency-card">
+                        <span class="emergency-number">100</span>
+                        <span class="emergency-name">Disque Direitos Humanos</span>
+                        <span class="emergency-desc">Canal nacional para denúncias de violações de direitos.</span>
+                    </a>
+                </div>
+
+                <div class="grid-2 emergency-extra">
+                    <div class="info-card">
+                        <h3>Onde buscar apoio presencial no Paraná</h3>
+                        <ul class="checklist">
+                            <li><strong>Delegacias da Mulher (DEAM)</strong> — presentes nas
+                                principais cidades do Estado, com atendimento especializado.</li>
+                            <li><strong>Patrulha Maria da Penha (PMPR)</strong> — visitas
+                                preventivas de acompanhamento de medidas protetivas.</li>
+                            <li><strong>Casa da Mulher Brasileira / Casas Abrigo</strong> —
+                                acolhimento, apoio jurídico, psicológico e social em local
+                                seguro.</li>
+                            <li><strong>CREAS</strong> (Centro de Referência Especializado de
+                                Assistência Social) do seu município — orientação social e
+                                encaminhamentos.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>Aplicativo "Sinal Vermelho"</h3>
+                        <p>
+                            Criado pela Lei 14.188/2021, o gesto do "X" desenhado na palma da
+                            mão é um sinal reconhecido nacionalmente para pedir ajuda em
+                            farmácias, estabelecimentos comerciais e órgãos públicos
+                            capacitados, sem precisar falar. Procure estabelecimentos com o
+                            selo "Sinal Vermelho contra a Violência Doméstica".
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREVENÇÃO -->
+        <section id="prevencao" class="section">
+            <div class="section-inner">
+                <span class="section-label">06 · Prevenção</span>
+                <h2>Como não ser a próxima</h2>
+                <p class="section-intro">
+                    Nenhuma mulher é responsável pela violência que sofre — a
+                    responsabilidade é sempre de quem agride. Ainda assim, reconhecer
+                    sinais de alerta e montar um plano de segurança pode salvar sua vida
+                    ou a de alguém que você conhece.
+                </p>
+
+                <h3 class="sub-h">Sinais de alerta em um relacionamento</h3>
+                <div class="grid-2">
+                    <ul class="styled-list">
+                        <li>Ciúme excessivo e controle sobre roupas, amizades ou redes sociais;</li>
+                        <li>Isolamento progressivo da família e dos amigos;</li>
+                        <li>Ameaças de morte, de suicídio ou de fazer mal a você ou a
+                            terceiros caso você o deixe;</li>
+                        <li>Controle financeiro total ou impedimento de trabalhar;</li>
+                        <li>Humilhações frequentes, em público ou em particular;</li>
+                    </ul>
+                    <ul class="styled-list">
+                        <li>Alternância entre agressividade extrema e momentos de
+                            carinho exagerado (ciclo da violência);</li>
+                        <li>Posse ou fácil acesso a armas de fogo ou armas brancas;</li>
+                        <li>Perseguição, monitoramento de celular ou localização;</li>
+                        <li>Histórico de violência em relacionamentos anteriores;</li>
+                        <li>Reação desproporcional a tentativas de separação.</li>
+                    </ul>
+                </div>
+
+                <h3 class="sub-h">Montando um plano de segurança</h3>
+                <div class="plan-grid">
+                    <div class="plan-card">
+                        <h4>Documentos e itens essenciais</h4>
+                        <p>Mantenha uma cópia de RG, CPF, certidões e comprovantes, além de
+                            uma quantia em dinheiro, em local de fácil acesso ou na casa de
+                            alguém de confiança.</p>
+                    </div>
+                    <div class="plan-card">
+                        <h4>Rede de apoio</h4>
+                        <p>Combine uma palavra-código com uma pessoa de confiança para
+                            pedir ajuda discretamente, presencial ou por mensagem.</p>
+                    </div>
+                    <div class="plan-card">
+                        <h4>Rota de saída</h4>
+                        <p>Identifique previamente uma saída segura de casa e um lugar para
+                            onde ir em caso de emergência — parente, amiga ou casa de
+                            acolhimento.</p>
+                    </div>
+                    <div class="plan-card">
+                        <h4>Registro de provas</h4>
+                        <p>Sempre que possível e seguro, guarde prints de ameaças, boletins
+                            de ocorrência, laudos médicos e fotos de lesões — isso fortalece o
+                            pedido de medida protetiva.</p>
+                    </div>
+                    <div class="plan-card">
+                        <h4>Medida protetiva de urgência</h4>
+                        <p>Pode ser solicitada na delegacia, independente de boletim de
+                            ocorrência formal, e o juiz tem até 48h para decidir. Em casos de
+                            risco imediato, a própria polícia pode concedê-la.</p>
+                    </div>
+                    <div class="plan-card">
+                        <h4>Cuidado nas redes sociais</h4>
+                        <p>Revise configurações de localização e privacidade, e evite
+                            compartilhar rotina em tempo real se estiver em situação de risco
+                            ou perseguição.</p>
+                    </div>
+                </div>
+
+                <div class="quote-block alt">
+                    <p>
+                        Se você reconhece esses sinais na sua relação ou na de alguém
+                        próximo, não espere a situação piorar. Ligue 180 para orientação
+                        confidencial ou procure a Delegacia da Mulher mais próxima. Pedir
+                        ajuda não é fraqueza — é o primeiro passo para se proteger.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>
+                Conteúdo informativo e educativo, produzido com base em dados públicos
+                da Secretaria de Segurança Pública do Paraná (SESP-PR), Sistema
+                Nacional de Informações de Segurança Pública (Sinesp), Fórum Brasileiro
+                de Segurança Pública e Senado Federal.
+            </p>
+            <p class="footer-emergency">Em caso de emergência, ligue <strong>190</strong> ou <strong>180</strong>.</p>
         </div>
-    </section>
-
-    <section id="casos">
-        <h2>Casos Recentes no Paraná</h2>
-        <p style="max-width: 800px; margin-bottom: 3rem;">O Paraná registrou casos dolorosos que reforçam a urgência de
-            ação. Aqui destacamos alguns para conscientização (fontes: Polícia Civil PR e mídia local).</p>
-
-        <div class="card-grid">
-            <div class="card">
-                <h3>Curitiba - Dezembro 2025</h3>
-                <p>Três feminicídios em um único fim de semana na capital. Vítimas entre 20 e 40 anos, agredidas por
-                    parceiros ou ex-parceiros. Um dos casos ocorreu em via pública.</p>
-                <small style="color: #aaa;">Fonte: G1 Paraná</small>
-            </div>
-            <div class="card">
-                <h3>Região Norte - 2025</h3>
-                <p>Múltiplos casos em cidades do norte do estado em curto intervalo. Agressores frequentemente com
-                    histórico de violência doméstica ignorado.</p>
-                <small style="color: #aaa;">Band Paraná</small>
-            </div>
-            <div class="card">
-                <h3>Estadual - Tendência</h3>
-                <p>Muitos casos envolvem ex-companheiros, ciúmes e descumprimento de medidas protetivas. A
-                    subnotificação é alta.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="estatisticas" style="background: #222;">
-        <h2>Estatísticas no Paraná</h2>
-
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-number">87</div>
-                <p>Feminicídios em 2025 (queda de ~20% em relação a 2024)</p>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">109</div>
-                <p>Feminicídios em 2024</p>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">0,73</div>
-                <p>Taxa por 100 mil habitantes em 2025 (uma das menores do Brasil)</p>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">355</div>
-                <p>Feminicídios consumados + tentados em 2025 (Monitor LESFEM)</p>
-            </div>
-        </div>
-
-        <p style="margin-top: 3rem; font-style: italic;">Apesar da redução oficial, o subregistro é preocupante. O
-            Datasus indica números bem maiores de mortes por agressão. A violência contra a mulher ainda é uma epidemia
-            silenciosa no estado.<grok-card data-id="2f52bf" data-type="citation_card"
-                data-plain-type="render_inline_citation"></grok-card><grok-card data-id="2a3e40"
-                data-type="citation_card" data-plain-type="render_inline_citation"></grok-card></p>
-    </section>
-
-    <section id="emergencia">
-        <h2>Números de Emergência</h2>
-        <div class="card-grid">
-            <div class="card">
-                <h3>🚨 Ligue 180</h3>
-                <p><strong>Central de Atendimento à Mulher</strong><br>24h, sigiloso e gratuito. Orientação, denúncia e
-                    encaminhamento.</p>
-                <a href="tel:180" class="btn" style="padding: 0.8rem 1.5rem; font-size: 1.1rem;">LIGAR 180</a>
-            </div>
-            <div class="card">
-                <h3>👮 190 - Polícia Militar</h3>
-                <p>Emergência imediata. Flagrante ou risco de vida.</p>
-            </div>
-            <div class="card">
-                <h3>📞 181 - Disque Denúncia</h3>
-                <p>Denúncia anônima de violência.</p>
-            </div>
-            <div class="card">
-                <h3>App 190 PR</h3>
-                <p>Botão do Pânico para mulheres com medida protetiva.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="tipos" style="background: #222;">
-        <h2>Tipos de Violência (Lei Maria da Penha)</h2>
-        <div class="card-grid">
-            <div class="card">
-                <h3>1. Física</h3>
-                <p>Agressões que ofendem a integridade corporal: tapas, socos, chutes, queimaduras, uso de armas.</p>
-            </div>
-            <div class="card">
-                <h3>2. Psicológica</h3>
-                <p>Humilhações, ameaças, controle, isolamento, gaslighting, vigilância constante.</p>
-            </div>
-            <div class="card">
-                <h3>3. Sexual</h3>
-                <p>Constrangimento a atos sexuais não desejados, abuso, negação de métodos contraceptivos.</p>
-            </div>
-            <div class="card">
-                <h3>4. Patrimonial</h3>
-                <p>Controle do dinheiro, destruição de bens, impedimento de trabalhar.</p>
-            </div>
-            <div class="card">
-                <h3>5. Moral</h3>
-                <p>Calúnia, difamação, injúria contra a mulher.</p>
-            </div>
-        </div>
-        <p style="margin-top: 3rem; text-align: center; font-size: 1.1rem;">Qualquer uma delas pode escalar para
-            feminicídio. Não minimize sinais.<grok-card data-id="f13902" data-type="citation_card"
-                data-plain-type="render_inline_citation"></grok-card></p>
-    </section>
-
-    <section id="sobre">
-        <h2>Sobre o Feminicídio</h2>
-        <p style="max-width: 900px; font-size: 1.2rem;">Feminicídio é o assassinato de mulheres motivado por razões de
-            gênero. No Brasil, é crime hediondo desde 2015. No Paraná, a maioria dos casos ocorre no âmbito doméstico,
-            cometido por parceiros ou ex-parceiros. É a ponta extrema de um ciclo de violência que começa com controle e
-            humilhação.</p>
-
-        <div style="margin-top: 3rem; background: var(--cinza-medio); padding: 2rem; border-radius: 12px;">
-            <h3 style="color: var(--roxo);">Por que acontece?</h3>
-            <ul style="margin-left: 1.5rem;">
-                <li>Machismo estrutural e desigualdade de gênero</li>
-                <li>Histórico de violência não denunciado</li>
-                <li>Descumprimento de medidas protetivas</li>
-                <li>Falta de rede de apoio e independência financeira</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="prevencao" style="background: #222;">
-        <h2>Como Não Ser a Próxima</h2>
-        <div class="card-grid">
-            <div class="card">
-                <h3>1. Reconheça os Sinais</h3>
-                <p>Ciúmes excessivo, isolamento de amigos/família, controle financeiro, ameaças.</p>
-            </div>
-            <div class="card">
-                <h3>2. Tenha um Plano de Fuga</h3>
-                <p>Guarde documentos, dinheiro, contatos de emergência e chaves em local acessível.</p>
-            </div>
-            <div class="card">
-                <h3>3. Denuncie Cedo</h3>
-                <p>Não espere a violência piorar. Ligue 180 ou registre BO.</p>
-            </div>
-            <div class="card">
-                <h3>4. Construa Rede</h3>
-                <p>Fale com amigas, familiares, ONGs. Busque apoio psicológico.</p>
-            </div>
-            <div class="card">
-                <h3>5. Seja Financeiramente Independente</h3>
-                <p>É uma das maiores proteções contra o ciclo de abuso.</p>
-            </div>
-            <div class="card">
-                <h3>6. Eduque e Exija</h3>
-                <p>Ensine filhos sobre respeito. Exija políticas públicas efetivas.</p>
-            </div>
-        </div>
-        <p style="text-align: center; margin-top: 4rem; font-size: 1.3rem; font-weight: 500;">Você não está sozinha.
-            Peca ajuda. Sobreviva. Viva.</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 - Site de Conscientização | Feminicídio Zero no Paraná</p>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">Este site é fictício-educacional e não substitui órgãos
-            oficiais. Denuncie sempre.</p>
     </footer>
 
-    <div class="emergency-bar">
-        <span>🚨 EMERGÊNCIA:</span>
-        <strong>Ligue 180 ou 190</strong>
-    </div>
-
-    <script>
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>
